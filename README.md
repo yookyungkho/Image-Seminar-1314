@@ -27,7 +27,7 @@ description: >-
 | [\[Lecture 12\] Visualizing and Understanding](lecture-12-visualizing-and-understanding.md) | 13기 강의정 |
 | [\[Lecture 13\] Generative Models](lecture-13-generative-models.md) | 13기 서아라 |
 | [\[Lecture 14\] Deep Reinforcement Learning](lecture-14-deep-reinforcement-learning.md) | 13기 이정은 |
-| [논문 리뷰 1](lecture-15-efficient-methods-and-hardware-for-deep-learning.md) | 13기 이유민 |
+| \[[논문 리뷰 1](lecture-15-efficient-methods-and-hardware-for-deep-learning.md)\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale | 13기 이유민 |
 | [\[Lecture 16\] Adversarial Examples and Adversarial Training](lecture-16-adversarial-examples-and-adversarial-training.md) | 13기 서아라 |
 | [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md) | 13기 고유경 |
 | [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md) | 13기 이홍정 |
