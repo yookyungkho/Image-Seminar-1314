@@ -8,7 +8,7 @@ description: 13기 강미경
 
   5강부터는 본격적으로 Convolution Neural Network\(CNN\)에 대해 배운다. CNN의 등장배경과 기본적인 구조에 대해 배우며, CNN의 레이어가 어떤 역할을 하는지 구체적으로 알아볼 것이다. 
 
-![](.gitbook/assets/image%20%28115%29.png)
+![](.gitbook/assets/image%20%28115%29%20%282%29.png)
 
 ## Contents
 
@@ -30,7 +30,7 @@ description: 13기 강미경
 
 ## 2. CNN 특징 및 구
 
-![](.gitbook/assets/image%20%28127%29%20%281%29.png)
+![](.gitbook/assets/image%20%28127%29%20%281%29%20%281%29.png)
 
      번에는 CNN 구조의 특징을 앞서 설명한 CNN의 등장배경과 연결지어 펴보도록 하자.
 
@@ -38,11 +38,11 @@ description: 13기 강미경
 2. 이미지 데이터의 특성에 맞는 2차원 내지는 3차원의 필터를 통한 합성곱 연산\(Convolution Operation\)을 통해 **지역성\(Locality\)**이 보장된다.
 3. 현재 Layer의 출력이 다음 레이어의 Input으로 들어가는 구조로, Feature들이 간단한 수준에서 점점 더 고차원적인 수준으로 변화해가는 **계층 구조**를 가진다.
 
-![](.gitbook/assets/image%20%2829%29%20%281%29.png)
+![](.gitbook/assets/image%20%2829%29%20%282%29%20%281%29.png)
 
     혹시 지역성에 대한 개념이 잘 와닿지 않는다면 위의 자료를 보는 것도 좋을 것 같다. 자료의 출처가 된 링크는 다음과 같다.  [\[Link\]](https://medium.com/@seoilgun/cnn%EC%9D%98-stationarity%EC%99%80-locality-610166700979)
 
-![](.gitbook/assets/image%20%2824%29%20%281%29.png)
+![](.gitbook/assets/image%20%2824%29%20%282%29%20%281%29.png)
 
   CNN의 특징을 봤다면, 이제는 구조를 보자. 다음과 같이 세 개의 구조가 적절히 반복되는 형태가 기본적이다. 보통 **Convolution Layer와 비선형 함수\(주로 RELU\)가 반복**된다. 기타 논문들이나 다른 자료에서는 Convolution 연산과 이에 따른 Activation map이 비선형 함수를 지나는 것을 포함하여 Convolution Layer라고 표현하기도 한다. 간간히 등장하는 **Pooling Layer**는 이미지의 크기를 축소하는 역할을 하며, 이를 통해 뽑아낸 특징을 더욱 invariant 하게 만들어주는 효과를 얻을 수 있다. CNN 구조의 맨 끝단에서 등장하는 **Fully Connected Layer**는 최종 스코어를 추출하기 위한 것이며, 위의 예시에서는 multi-classification 문제이므로 Softmax를 활성함수로 사용했다.
 
@@ -54,7 +54,7 @@ description: 13기 강미경
 
   Fully Connected Layer에서 이미지를 처리하려면 데이터를 1차원 벡터로 쭉 stretch 하여 네트워크의 Input으로 넣어야 한다. 그리고 우리가 익히 들어 알고있는 것과 같이, 가중치 벡터와 입력벡터가 내적하면서 연산이 이루어진다.
 
-![](.gitbook/assets/image%20%289%29.png)
+![](.gitbook/assets/image%20%289%29%20%282%29.png)
 
   반면 Convolution Layer의 연산은 좀 다른 형태로 이루어진다. 먼저 입력 데이터가 1차원이 아니라, 이미지 데이터의 생김새 그대로이다. **데이터의 공간적 특성을 그대로 유지한 채 레이어를 통과하는 것이다.** 그리고 필터를 바탕으로 한 연산이 이루어진다. 필터가 이미지를 슬라이딩 하면서 공간적인 내적을 수행한다.
 
@@ -62,13 +62,13 @@ description: 13기 강미경
 
   이 필터의 차원과 개수는 혼동되기 쉬운 개념이기 때문에 잘 잡고가는 것이 중요하다. **필터의 차원은 Input feature map의 차원과 같다.** 즉, 32x32x3 사이즈의 Input feature map을 Convolution 연산하기 위해서는 채널이 3인 필터가 필요하다는 것이다. 필터는 이미지의 부분부분을 슬라이딩해 나가지만 그 depth는 모두 훑고 지나가기 때문이다.
 
-![](.gitbook/assets/image%20%28119%29%20%281%29.png)
+![](.gitbook/assets/image%20%28119%29%20%285%29%20%281%29.png)
 
    다음은 필터의 개수이다. **필터의 차원과 달리 필터의 개수는 Output feature map의 차원\(채널\)과 같다.**  위의 예제에서 출력으로 채널이 3인 Activation map\(Output feature map\)을 얻고 싶다면 필터 5x5x3짜리 필터 3개가 필요하다.
 
  각 필터는 서로 다른 특징을 추출하기 때문에 위의 그림에서 파랑 필터와 초록 필터는 서로 다른 특징을 가지고 있다. 때문에  Activation map의 각 채널 또한 서로 다른 특징을 가지고 있다. 그리고 특징은 풍부하게 뽑는 것이 좋기 때문에 보통은 여러 개의 필터를 사용하며, 그 개는 강의에서 언급되었던 것과 같이 보통 2의 제곱수 인 32, 64, 128, 512 등으로 사용한다고 한다.
 
-![](.gitbook/assets/image%20%28109%29%20%2817%29.png)
+![](.gitbook/assets/image%20%28109%29%20%284%29%20%2817%29.png)
 
  이 그림은 필터가 어떻게 생겼는지 이해하기 좋은 자료이다. 각 그리드의 요소들은 **필터를 시각화**한 것이다. Input으로 들어가는 강아지 사진에 대해서, Convolution Layer들 내부의 각 필터들이 어떻게 생겼는지 볼 수 있다. 각 필터의 모습들은 Convolution 연산에서 필터가 이미지를 슬라이드해 나갈 때, 이미지의 어떤 특징을 잡아낼 것인지를 표현한다. 
 
@@ -76,7 +76,7 @@ description: 13기 강미경
 
   또 한가지 눈여겨볼 점은, 처음 low level의 필터은 edge 정보, 간단한 색상 등의 낮은 차원의 특징들을 가지고 있는 반면, high-level의 특징\(오른쪽들\)로 갈수록 필터들이 고차원적인 특징을 담고 있다는 것이다.  보다 깊은 층의 레이어에서 추출한 Conv5\_3레이어의 필터는 체적인 모습을 특징으로 담고 있는 것을 볼 수 있다. 
 
-![](.gitbook/assets/image%20%2879%29.png)
+![](.gitbook/assets/image%20%2879%29%20%283%29.png)
 
   다음으로 살펴볼 것 Activation map을 시각화한 것이다.  맨 상단, 1차원 벡터의 형태로 나와있는 것은 필터이다. 그리고 그 아래 회색으로 표현된 그리드의 각 요소들은 이들 필터로 연산한 결과들을 나타낸다. 
 
