@@ -2,37 +2,37 @@
 
 ## CS231n 14강 리뷰
 
-
+14강은 강화학습에 대해 알아본다.
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0001.jpg)
 
-![](.gitbook/assets/cs231n_lecture14_ljeun_page-0002.jpg)
-
 ## Reinforcement Learning \(강화학습\)
+
+![](.gitbook/assets/cs231n_lecture14_ljeun_page-0003.jpg)
+
+**Reinforcement Learning\(강화학습\)**은 **agent**가 최대 **reward**를 받을 수 있는 **action**을 취하도록 학습 시키는 것을 목적으로 한다. 이는 달리 말하면 최적의 **정책 함수\(policy\)**를 찾는 것과 같은 의미이다.
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0004.jpg)
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0005.jpg)
 
-Reinforcement Learning에는 몇 가지 중요한 용어들이 있다.
+강화학습을 설명하기 위해 필요한 중요한 용어들이 있다.
 
-state\(상태\)는 agent가 action을 선택하기 위해 받는 정보를 의미한다. 각각 agent\(주체\)는 environment에서 action을 취하는 주체이며, action은 agent가 특성 state에서 취할 수 있는 행동을 말한다. 각 agent가 action을 취하면 reward\(보상\)을 받게 된다. 이 모든 것들이 일어나는 배경을 environment\(환경\)이라고 한다. 
+**state\(상태\)**는 agent가 action을 선택하기 위해 받는 정보를 의미한다. 각 **agent\(주체\)**는 environment에서 action을 취하는 주체이며, **action**은 agent가 특성 state에서 취할 수 있는 행동을 말한다. 각 agent가 action을 취하면 reward\(보상\)을 받게 된다. 이 모든 것들이 일어나는 배경을 **environment\(환경\)**이라고 한다. 
 
-agent가 특정 state에서 어떤 action을 취할지 골라주는 함수를 policy\(정책\)이라고 하며, 시작부터 종료까지 agent가 거친 일련의 \(state, action, reward\)들을 episode라고 한다.
-
-![](.gitbook/assets/cs231n_lecture14_ljeun_page-0003.jpg)
-
-즉, Reinforcement Learning\(강화학습\)은 agent가 최대 reward를 받을 수 있는 action을 취하도록 학습시키는 것을 목적으로 한다. 이는 달리 말하면 최적의 정책 함수\(policy\)를 찾는 것과 같은 의미이다.
+agent가 특정 state에서 어떤 action을 취할지 골라주는 함수를 **policy\(정책\)**이라고 하며, 시작부터 종료까지 agent가 거친 일련의 \(state, action, reward\) 시퀀스를 **episode\(에피소드\)**라고 한다.
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0006.jpg)
 
-강화학습의 과정은 다음과 같다.
+environment는 agent의 action에 따라 reward를 제공하고, 다음 state를 부여한다.
 
-\(추가해야함\)
+위 과정은 종료 상태가 될 때까지 즉, 하나의 에피소드가 끝날 때까지 반복된다.
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0007.jpg)
 
-강화학습의 예시이다.
+다음은 강화학습의 예시이다.
+
+각
 
 ## Markov Decision Process \(MDP\)
 
