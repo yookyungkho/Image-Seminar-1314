@@ -1,7 +1,3 @@
----
-description: 13기 고유경
----
-
 # \[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)
 
 #### MIT 6.S093: Introduction to Human-Centered Artificial Intelligence \(AI\)
