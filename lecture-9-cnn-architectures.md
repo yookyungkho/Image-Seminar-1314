@@ -1,5 +1,7 @@
 # \[Lecture 9\] CNN Architectures
 
+## CS231n 9강 Review
+
 ![](.gitbook/assets/2020-12-10-12.07.02.png)
 
 ![](.gitbook/assets/2020-12-10-1.25.34.png)
