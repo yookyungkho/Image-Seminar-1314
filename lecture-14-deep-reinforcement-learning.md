@@ -64,7 +64,7 @@ Stochastic Policy는 ****2가지로 나눌 수 있다. **Random Policy**는 모�
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0012.jpg)
 
-즉, **최적의 정책 pi\***는 reward의 합을 최대로 만드는 정책을 의미한다.
+MDP를 정의하면 **최적의 정책 pi\***을 찾아야 하는데, 이는 reward의 합을 최대로 만드는 정책을 의미한다.
 
 실제 초기 상태를 샘플링할 때, 전이 확률 분포 등에서는 다음 상태가 확률적이다. 이러한 randomness를 다루기 위해서 **reward의 합의 기댓값을 최대화**하여 최적의 정책 pi\*를 계산하게 된다.
 
@@ -72,21 +72,43 @@ Stochastic Policy는 ****2가지로 나눌 수 있다. **Random Policy**는 모�
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0013.jpg)
 
+최적의 정책을 찾기 위해 사용되는 몇 가지 정의가 존재한다. 정책에 따라 각 에피소드를 수행하면, \(_s0, a0, r0, s1, a1, r1, ..._\)와 같은 경로를 얻게 되는데, 이를 사용하여 정의한다.
 
+**Value Function**은 _'현재 속해있는 상태가 얼마나 좋은가?'_ 에 대한 값을 나타내는 것으로, **상태 s**와 **정책 pi**가 주어졌을 때, **누적된 보상의 기댓값**을 의미한다. 
 
-
-
-
+Q-value Function은 _'현재 속해있는 상태에서 어떤 행동을 취해야 좋은가?'_ 를 의미한다. 이는 **상태 s**와 **정책 pi** 그리고 **행동 a**가 주어졌을 때 받을 수 있는 **누적된 보상의 기댓값**이다. 
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0014.jpg)
 
+최적의 정책 pi\*로부터 나온 최적의 정책 함수 **Q-value Function Q\***는 **Bellman equation**\(벨만 방정식\)을 만족한다. 즉, 벨만 방정식은 최적의 정책 함수를 찾는 가장 기본적인 방법이다.
+
+따라서 벨만 방정식을 따르는 최적의 정책 함수 수식은 위와 같다.
+
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0015.jpg)
+
+**Q\***는 **어떤 행동을 취했을 때 미래에 받을 보상의 최대치**를 의미한다. 
+
+다음 **Q\*\(state, action\)**를 구할 때, 현재 Q\*\(state, action\)를 안다면 이를 통해서 다음 상태에서 최상의 행동을 취할 수 있는 최적의 정책을 구할 수 있다. 여기서 말하는 **최적의 정책은 r+rQ\*\(s',a'\)의 기댓값을 최대화하는 행동을 취하는 것**이다.
+
+벨만 방정식을 만족하는 최적의 정책을 푸는 방법에는 **Value Iteration**과 **Policy Iteration**이 있다. 
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0016.jpg)
 
+**Value Iteration**은 **벨만 방정식을 사용해 각 step마다 Q를 조금씩 최적화**하는 방법이다. 따라서 i가 무한대라면 최적의 정책 함수인 Q\*로 수렴하게 된다.
+
+이를 구하는 과정에서 반복적인 업데이트를 위해 모든 Q\(s,a\)를 계산해야 한다. 기본적으로 전체 상태 공간은 매우 커서 계산하는 것이 사실상 불가능하기 때문에, neural network 등의 방법으로 Q\(s,a\)를 근사시켜 추정하게 된다.
+
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0017.jpg)
 
+앞서 말했듯이 **action-value function 추정을 위해 함수를 근사**시키게 되는데, 이 과정에서 deep neural network를 사용하고, 이를 **deep Q-Learning**이라고 한다.
+
+Q-function은 벨만 방정식을 따르기 때문에, 식은 위와 같고 학습은 아래와 같이 진행된다.
+
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0018.jpg)
+
+**Foward Pass**의 loss 함수 Q-function 값과 벨만 방정식의 차이이다. 실제 학습 시 loss가 작아지도록, **두 차이가 최소가 되도록** 학습을 진행한다. 이 과정을 반복하며  Q가  Q\*에  가까워지도록  학습시 다.
+
+**Backward Pass**는 **계산한 loss를 바탕으로 파라미터인 theta 업데이트**를 진행한다.
 
 ![](.gitbook/assets/cs231n_lecture14_ljeun_page-0019.jpg)
 
