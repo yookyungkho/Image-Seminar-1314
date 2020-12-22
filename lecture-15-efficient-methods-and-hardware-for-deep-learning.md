@@ -2,7 +2,7 @@
 description: 13기 이유민
 ---
 
-# \[논문 리뷰 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
+# \[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
 
 **An Image is Worth 16X16 Words: Transformers for Image Recognition at Scale**  
 Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby  

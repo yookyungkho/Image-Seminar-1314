@@ -52,27 +52,5 @@
 
 ![](.gitbook/assets/2020-12-10-4.07.16.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% file src=".gitbook/assets/cs231n\_lecture9\_review\_ujkang \(1\).pdf" caption="cs231n\_lecture9\_review\_ujkang" %}
 
