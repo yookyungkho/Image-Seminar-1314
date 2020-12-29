@@ -31,7 +31,7 @@ description: >-
 | [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md) | 13기 고유경 |
 | [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md) | 13기 이홍정 |
 | [\[Microsoft Research\] An Introduction to Graph Neural Networks](microsoft-research-an-introduction-to-graph-neural-networks-models-and-applications.md) | 13기 이혜민 |
-| [\[Paper Review 2\]](2.md) | 13기 강미경 |
+| [\[Paper Review 2\] You Only Look Once Unified, Real-Time Object Detection](2.md) | 13기 강미경 |
 
 
 
