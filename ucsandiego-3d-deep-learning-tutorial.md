@@ -1,3 +1,7 @@
+---
+description: 13기 이홍정
+---
+
 # \[UCSanDiego\] 3D Deep Learning Tutorial
 
 ####  University of California San Diego. 3D Deep Learning Tutorial

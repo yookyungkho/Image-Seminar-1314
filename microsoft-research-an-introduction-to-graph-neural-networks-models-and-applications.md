@@ -1,3 +1,7 @@
+---
+description: 13기 이혜민
+---
+
 # \[Microsoft Research\] An Introduction to Graph Neural Networks: Models and Applications
 
 #### Microsoft Research Cambridge. An Introduction to Graph Neural Networks: Models and Applications
