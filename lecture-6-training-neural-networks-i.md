@@ -148,35 +148,71 @@ relu에서 weight를 처음에 잘못 초기화시키면 처음부터 gradient�
 
 ![](.gitbook/assets/image%20%2819%29.png)
 
-![](.gitbook/assets/image%20%2896%29.png)
+지금부터는 데이터가 적절하게 흐르게 하기 한 초기화 방법을 살펴본다.
 
 ### 3.3. Xavier Initialization
 
 ![](.gitbook/assets/image%20%2881%29.png)
 
+Xavier 초기화 방법은 activation function이 시그모이드나 tanh를 사용한다고 가정했을 때 gradient vanishing문제를 막기 위한 방법이다. weight를 초기화하여 activation function에 input이 되는 값이 ㅡ saturation 범위에 걸리지 않도록 해 주는 이다.
+
+이 노드와 다음 노드 개수에 의존하는 방법으로, 매우 효과적인 결과를 보이지만 활성화 함수로 ReLU를 용하는 경우 문제가 생긴다. ReLU는 출력의 절반을 죽이기 때에 출력의 분산을 반토막내고, 점점 많은 값들이 0이 된다. 따라서 ReLU와 같은 활성화 함수의 경우에는 다른 초기화 방법을 사용해야 한다.
+
 ### 3.4. HE Initialization
 
 ![](.gitbook/assets/image%20%2838%29.png)
+
+He initialization은 이 문제를 해결한다. relu 출력을 절반을 줄이므로 2로 한 번 나눠 준다. 결과적으로 더 넓게 분포시켜주어 출력값이 고르게 분포되는 것을 확인할 수 있다.
 
 ## Unit 4. Batch Normalization
 
 ![](.gitbook/assets/image%20%28124%29.png)
 
+batch normalization은 논문 흐름대로 쭉 설명한다. 
+
+우선 batch normalization은 DNN의 internal covariate shift 성향을 피하기 위해 사용한다. 우리는 트레이닝 데이터를 잘 학습시켜 test 데이터를 잘 분류해야 하기 때문에, DNN 모델이 가지는 가중치 분포가 모두 동일해야 한다. 하지만 서로 다른 분포를 가지는 현상을 상단 ㅡ림고 같이 covariate shift라 한다.
+
 ![](.gitbook/assets/image%20%2834%29.png)
+
+internal shift를 좀 더 구체적으로 설명하면 ㅏ래와 같다.
+
+training data를 학습시킬 때, 이전 레이어의 값에 따라 다음 레이어 값들이 영향을 받게 된다. 이 때 dkaㅜ ㅠ제없이 제멋대로 학습이 진행되는 경우 가중치 값들의 범위가 넓어지게 되어 매개변수 값들의 qㅕㄴ동이 심해지게 되는 현상이다. 
 
 ![](.gitbook/assets/image%20%284%29.png)
 
+이러한 현상은 whitning으로 해결한다. 하지만 계산량이 고 상수 bias의 값이 무시되는 등의 문제가 생기기 때문에 다른 접근을 하게 된다.
+
 ![](.gitbook/assets/image%20%2892%29.png)
 
+whitening의 단점을 보완하고 동시에 internal covariate를 줄이기 위해 batch normalization이 어떻게 접근했는지 살펴 보자.
+
+첫째, 레이어의 인풋이 d차원일 때, d개의 스칼라 값 사이의 상관관계를 무시하고 독립적으로 normalize한다. 즉 각각의 피처들이 이미 uncorelated 되어있다고 가정하는 것이다.
+
+둘째, normalize를 전체 데이터셋이 아닌 mini batch 개념에서 계산해서 사용하는 것이다.
+
+각각의 방법을 차례대로 살펴 보자. 
+
 ![](.gitbook/assets/image%20%2890%29.png)
+
+먼저, 각 feature값이 상관없다고 가정하고 각각 독립적으로 normalize하는 경우이다. 따라서 앞선 whitening의 복잡한 식들이 매우 단순한 scalar 계산만으로 normalization이 가능해진다. 하지만 NN이 표현할 수 있는 것들이 제한될 수 밖에 없고 상관관계를 무시하고 학습하기 때문에 제대로 training이 되지 않는 상황이 발생할 수도 있다. 또한 각 피처에 ㅐ해 scalar형태로 평균과 분산을 구하고, 각각 normalize하면 평균 0, 분산 1로 고정되므로 sigmoid와 같은 활성화함수를 사용하는 경우 출력값이 linear한 부분만 나타나 nonlinearity를 애버리는 문제가 발생한다. 
+
+이러한 문제들을 보완하기 위해 normalize한 값에 scale factor로 gamma를 shift factor로 추가한다. 이 수는 back-propagation 과정에서 함께 train된다. 이 때 네트워크를 그대로 사용하고  싶다면 gamma는 분산, beta는 평균으로 사용하면 된다.
 
 ![](.gitbook/assets/image%20%2874%29.png)
 
 ![](.gitbook/assets/image%20%2888%29.png)
 
+두번째 접근은 1\)번으로 인해 가능한데, 관련 수식은 참고자료로 확인할 수 있다.
+
+두번째 방법은 training data 전체에 대해 mean 과 variance를 구하는 것 이 아니라, mini batch 단위로 접근하여 계산한다. 현재 택한 mini batch 안에서만 mean과 variance를 구해서 그 값으로 normalize를 k므로 훨씬 효율적이다.
+
 ![](.gitbook/assets/image%20%2855%29.png)
 
+일반적으로 batch normalization은 fully connected나 convolutional layer바로 다음 활성화 함수를 통과하기 전에 사용한다.
+
 ![](.gitbook/assets/image%20%28118%29.png)
+
+batch normalization의 train 시 알 고 리 즘 을 살 펴 보 면 다 음 과 같 습 니다 . 미니배치 단위에서 평균과 분산을 구하고, 그 값 으로 normalize 시킨 후 gamma와 beta 파라미터를 통해 scale 과 shift도 시켜 준다.
 
 ![](.gitbook/assets/image%20%28102%29.png)
 
@@ -186,7 +222,7 @@ relu에서 weight를 처음에 잘못 초기화시키면 처음부터 gradient�
 
 ![](.gitbook/assets/image%20%2843%29.png)
 
-![](https://github.com/Tobigs-team/Image-Seminar-1314/tree/c6c22fe8fdb46547b81f4cbb63bac809365a6fa5/.gitbook/assets/image%20%2827%29.png)
+batch normalization 을 사용함으로써 얻는 장점들을 정리하면 상단과 같다.
 
 ![](.gitbook/assets/image%20%288%29.png)
 
