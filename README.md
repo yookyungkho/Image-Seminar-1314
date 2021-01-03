@@ -8,16 +8,15 @@ description: >-
 
 ## CS231n: Convolutional Neural Networks for Visual Recognition
 
-#### 1. [Syllabus](http://cs231n.stanford.edu/syllabus.html)
+### 1. [Syllabus](http://cs231n.stanford.edu/syllabus.html)
 
-#### 2. [Lecture Videos](https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv)
+### 2. [Lecture Videos](https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv)
 
-#### 3. [Original Gitbook Link](https://app.gitbook.com/@tobigs-staff/s/-1/)
-
+### 3. [Original Gitbook Link](https://app.gitbook.com/@tobigs-staff/s/-1/)
 
 | Lecture | Reviewer |
 | :--- | :--- |
-| [\[Lecture 5\] Convolutional Neural Networks](lecture-5-convolutional-neural-networks.md) | 13기 강미경               |
+| [\[Lecture 5\] Convolutional Neural Networks](lecture-5-convolutional-neural-networks.md) | 13기 강미경 |
 | [\[Lecture 6\] Training Neural Networks I](lecture-6-training-neural-networks-i.md) | 13기 이유민 |
 | [\[Lecture 7\] Training Neural Networks II](lecture-7-training-neural-networks-ii.md) | 13기 고유경 |
 | [\[Lecture 9\] CNN Architectures](lecture-9-cnn-architectures.md) | 13기 강의정 |
@@ -32,6 +31,4 @@ description: >-
 | [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md) | 13기 이홍정 |
 | [\[Microsoft Research\] An Introduction to Graph Neural Networks](microsoft-research-an-introduction-to-graph-neural-networks-models-and-applications.md) | 13기 이혜민 |
 | [\[Paper Review 2\] You Only Look Once Unified, Real-Time Object Detection](2.md) | 13기 강미경 |
-
-
 
