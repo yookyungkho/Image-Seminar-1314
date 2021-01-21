@@ -10,13 +10,17 @@ description: 13기 고유경
 
 ![](.gitbook/assets/1%20%281%29.png)
 
-이번 주차에서는 특별 시간으로 MIT 컴퓨터공학과 Lex Fridman 교수의 인간중심 AI 개론 강의를 리뷰하겠다.
+이번 주차는 특별 시간으로 MIT 컴퓨터공학과 Lex Fridman 교수의 인간중심 AI 개론 강의를 리뷰하고자 다.
 
 ![](.gitbook/assets/2%20%281%29.png)
+
+
 
 ## 1. Human-Centered AI
 
 ![](.gitbook/assets/6%20%281%29.png)
+
+AI는 
 
 ![](.gitbook/assets/7%20%281%29.png)
 
