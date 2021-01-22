@@ -25,10 +25,10 @@ description: >-
 | [\[Lecture 12\] Visualizing and Understanding](lecture-12-visualizing-and-understanding.md) | 강의정 |
 | [\[Lecture 13\] Generative Models](lecture-13-generative-models.md) | 서아라 |
 | [\[Lecture 14\] Deep Reinforcement Learning](lecture-14-deep-reinforcement-learning.md) | 이정은 |
-| [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](lecture-15-efficient-methods-and-hardware-for-deep-learning.md) | 이유민 |
 | [\[Lecture 16\] Adversarial Examples and Adversarial Training](lecture-16-adversarial-examples-and-adversarial-training.md) | 서아라 |
 | [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md) | 고유경 |
 | [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md) | 이홍정 |
 | [\[Microsoft Research\] An Introduction to Graph Neural Networks](microsoft-research-an-introduction-to-graph-neural-networks-models-and-applications.md) | 이혜민 |
+| [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://app.gitbook.com/@tobigs-staff/s/-1/~/drafts/-MRe3WaRBHnoMpPAt-Eb/paper-review-1-an-image-is-worth-16x16-words-transformers-for-image-recognition-at-scale) | 이유민 |
 | [\[Paper Review 2\] You Only Look Once Unified, Real-Time Object Detection](2.md) | 강미경 |
 
