@@ -4,7 +4,7 @@ description: 13기 이유민
 
 # \[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
 
-![](.gitbook/assets/image%20%28132%29.png)
+![](.gitbook/assets/1-1.jpg)
 
 **An Image is Worth 16X16 Words: Transformers for Image Recognition at Scale**  
 Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby  
@@ -59,11 +59,45 @@ Self-attention을 image에 naive하게 적용하려면 각 픽셀이 다른 모�
 
 ## 3. Method <a id="3-method"></a>
 
+해당 부분 설명은 세미나 발표에서 사용한 슬라이드를 토대로 리뷰했다.
+
+{% hint style="info" %}
+#### Model flow
+
+모델은 이미지를 고정된 크기의 패치로 쪼개고, 각각을 선형적으로 임베딩한 후 위치 임베딩을 더하여 결과 백터를 일반적인 Transformer 인코더의 인풋으로 입력한다. 분류 과제를 수행하기 위해 추가적으로 학습되는 "classification token"을 만들어 시퀀스에 더한다.
+{% endhint %}
+
 ![](.gitbook/assets/image%20%28131%29.png)
+
+###  <a id="31-vision-transformervit"></a>
 
 ### 3.1 Vision Transformer\(ViT\) <a id="31-vision-transformervit"></a>
 
+편의상 image input과 architecture 부분으로 나누어 설명한다.
+
+![](.gitbook/assets/1-6.jpg)
+
+![](.gitbook/assets/image%20%28141%29.png)
+
+![](.gitbook/assets/image%20%28140%29.png)
+
+
+
+지금부터는 아래 수식에 대해 살펴다.
+
+![](.gitbook/assets/image%20%28143%29.png)
+
+![](.gitbook/assets/image%20%28139%29.png)
+
+![](.gitbook/assets/image%20%28138%29.png)
+
+![](.gitbook/assets/image%20%28136%29.png)
+
 ### 3.2 Fine-tuning and Higher Resolution <a id="32-fine-tuning-and-higher-resolution"></a>
+
+일반적으로 대규모 데이터 세트에 대해 ViT 를 pre-train 하고 downstream task를 find-tuning 한다. 이를 위해 pre-train 된 prediction head 를 제거하고 0으로 초기화한 D x K feedforward layer를 연결\(K: downstream class 의 수\)한다. pre-train 보다 높은 해상도로 fine-tuning 을 하는 것이 성능에 도움이 된다. 
+
+Pre-train 보다 높은 resolution으로 fine-tuning하는 것은 종종 도움이 되며, 더 높은 resolution의 이미지를 feed할 때 patch 크기를 동일하게 유지하므로 sequence length가 더 길어진다. Vision Transformer는 임의의 sequence length\(up to memory constraint\)를 처리할 수 있지만 pre-trained position embedding은 의미가 없을 수 있다. 따라서 원본 이미지에서의 position에 따라 pre-trained position embedding의 2D interpolation을 수행한다. 이와 같은 해상도 조정과 패치 추출은 이미지의 2D 구조에 대한 inductive bias가 Vision Transformer에 수동으로 적용되는 유일한 부분으로 볼 수 다.
 
 ## 4. Experiments <a id="4-experiments"></a>
 
@@ -132,7 +166,7 @@ ViT-L/16 모델은 모든 dataset에서 BiT-L과 일치하거나 더 좋은 성�
 ViT는 전이학습에 폭넓게 효과적이다.
 {% endhint %}
 
-###  <a id="43-pre-training-data-requirements"></a>
+
 
 ### 4.3 Pre-training Data Requirements <a id="43-pre-training-data-requirements"></a>
 
@@ -239,11 +273,17 @@ Image recognition에서 Transformer를 직접 적용하는 방법을 제안했�
 
 ### Reference
 
-[https://qiita.com/omiita/items/0049ade809c4817670d7](https://qiita.com/omiita/items/0049ade809c4817670d7)
-
-[https://engineer-mole.tistory.com/133](https://engineer-mole.tistory.com/133)
-
-[https://jeonsworld.github.io/vision/vit/](https://jeonsworld.github.io/vision/vit/)
-
-[https://www.slideshare.net/DongminChoi6/vit-vision-transformer-review-cdm](https://www.slideshare.net/DongminChoi6/vit-vision-transformer-review-cdm)
+> [https://qiita.com/omiita/items/0049ade809c4817670d7](https://qiita.com/omiita/items/0049ade809c4817670d7)
+>
+> [https://engineer-mole.tistory.com/133](https://engineer-mole.tistory.com/133)
+>
+> [https://jeonsworld.github.io/vision/vit/](https://jeonsworld.github.io/vision/vit/)
+>
+> [https://www.slideshare.net/DongminChoi6/vit-vision-transformer-review-cdm](https://www.slideshare.net/DongminChoi6/vit-vision-transformer-review-cdm)
+>
+> [https://littlefoxdiary.tistory.com/70](https://littlefoxdiary.tistory.com/70)
+>
+> [https://jeonsworld.github.io/vision/vit/](https://jeonsworld.github.io/vision/vit/)
+>
+> [https://eehoeskrap.tistory.com/486](https://eehoeskrap.tistory.com/486)
 
