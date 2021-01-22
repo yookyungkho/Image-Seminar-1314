@@ -7,18 +7,18 @@ description: 13기 이유민
 ![](.gitbook/assets/1-1.jpg)
 
 **An Image is Worth 16X16 Words: Transformers for Image Recognition at Scale**  
-Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby   
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby  
 [https://arxiv.org/abs/2010.11929](https://arxiv.org/abs/2010.11929)
 
 ## 0. Abstract <a id="abstract"></a>
 
-이번 리뷰에서는 현재 AI계에서 큰 관심을 받고 있는 "Vision Transformer"\(이하 ViT\)에 대해 다룬다. 
+이번 리뷰에서는 현재 AI계에서 큰 관심을 받고 있는 "Vision Transformer"\(이하 ViT\)에 대해 다룬다.
 
-자연어 처리 분야에서 널리 사용되고 있는 Transformer 구조는 아직 컴퓨터 비전 분야에서 적용된 사례가 거의 없다. 지금까지의 attention은 컴퓨터 비전에서 CNN 구조에 주로 적용되어, 전체 구조를 유지하면서 bottleneck에서 attention하는 방식으로 진행되었다. 
+자연어 처리 분야에서 널리 사용되고 있는 Transformer 구조는 아직 컴퓨터 비전 분야에서 적용된 사례가 거의 없다. 지금까지의 attention은 컴퓨터 비전에서 CNN 구조에 주로 적용되어, 전체 구조를 유지하면서 bottleneck에서 attention하는 방식으로 진행되었다.
 
-본 논문에서는 이렇게 특정 구성 요소를 대체하는 것에 그치지 않고 image patch의 seqeuence에 Transformer를 적용하면 이미지 분류 task에서 우수한 성능을 보인다는 것을 발견했다. 많은 양의 데이터로 사전 학습\(pre-trained\)을 수행하고, 여러가지 ****recognition benchmark\(ImageNet, CIFAR-100, VTAB 등\)에 대해 transfer learning을 수행하면 학습과정에서 SOTA보다 훨씬 적은 계산량으로 우수한 결과를 얻을 수 있다.
+본 논문에서는 이렇게 특정 구성 요소를 대체하는 것에 그치지 않고 image patch의 seqeuence에 Transformer를 적용하면 이미지 분류 task에서 우수한 성능을 보인다는 것을 발견했다. 많은 양의 데이터로 사전 학습\(pre-trained\)을 수행하고, 여러가지 _\*\*_recognition benchmark\(ImageNet, CIFAR-100, VTAB 등\)에 대해 transfer learning을 수행하면 학습과정에서 SOTA보다 훨씬 적은 계산량으로 우수한 결과를 얻을 수 있다.
 
-&gt;&gt; Transformer의 계산 효율성과  scalability를 비전에 활용한다!
+&gt;&gt; Transformer의 계산 효율성과 scalability를 비전에 활용한다!
 
 ### **※ Transformer in NLP**
 
@@ -27,21 +27,21 @@ Long-term Dependency problem
 
 Solution : LSTM\(Long Short Term Memory-&gt; Attention
 
-어텐션으로 인코더/디코더로 구현한 것 :  transformer!
+어텐션으로 인코더/디코더로 구현한 것 : transformer!
 {% endhint %}
 
 ## 1. Introduction <a id="1-introduction"></a>
 
 NLP에서 Transformers는 대부분 large text corpus에서 pre-train을 수행하고, task-specific dataset에 대해 fine-tuning을 수행하는\(BERT\) 방식으로 접근한다.
 
-Transformers의 계산 효율성 및 확장성으로 100B 이상의 parameter를 사용하여 큰 모델을 학습 할 수 있게 되었다. 하지만 computer vision 분야에서는 여전히 CNN을 많이 사용하고 있으며 몇몇 연구에서 CNN과 비슷한 아키텍처와 self-attention의 결합을 시도해 왔다. 연구 예시는 아래 링크로 대체한다. 
+Transformers의 계산 효율성 및 확장성으로 100B 이상의 parameter를 사용하여 큰 모델을 학습 할 수 있게 되었다. 하지만 computer vision 분야에서는 여전히 CNN을 많이 사용하고 있으며 몇몇 연구에서 CNN과 비슷한 아키텍처와 self-attention의 결합을 시도해 왔다. 연구 예시는 아래 링크로 대체한다.
 
 * [Wang et al., 2018](https://arxiv.org/abs/1906.01787); [Carion et al., 2020](https://arxiv.org/abs/2005.12872) 
 * [Ramachandran et al., 2019](https://arxiv.org/abs/1906.05909); [Wang et al. , 2020a](https://arxiv.org/abs/2003.07853)\).
 
-본 논문에서는 NLP의 Transformer 에서 모델을 가능한 수정하지 않으면서 Transformer 를 이미지에 직접 적용해본다. 
+본 논문에서는 NLP의 Transformer 에서 모델을 가능한 수정하지 않으면서 Transformer 를 이미지에 직접 적용해본다.
 
-**이를 위해 1\)이미지를 패치로 분할하고, 2\)이러한 패치의 선형 임베딩 시퀀스\(linear embedding sequence\)를 Transformer의 입력으로 한다. 이 때, 이미지 패치는 NLP 에서 token\(word\)와 동일한 방식으로 처리된다.** 
+**이를 위해 1\)이미지를 패치로 분할하고, 2\)이러한 패치의 선형 임베딩 시퀀스\(linear embedding sequence\)를 Transformer의 입력으로 한다. 이 때, 이미지 패치는 NLP 에서 token\(word\)와 동일한 방식으로 처리된다.**
 
 모델은 ImageNet 과 같은 중간 규모의 데이터셋에서 학습할 때 비슷한 크기의 ResNet 보다 약간 낮은 정확도를 달성한다. **이는 equivariance 및 locality 즉 CNN 고유의 inductive bias 를 고려할 수 있는 기능이 transformer 에 없기 때문에 불충분한 양의 데이터에 대해 학습할 때 일반화가 잘 되지 않는 문제가 있기 때문이다.**
 
@@ -69,8 +69,6 @@ Self-attention을 image에 naive하게 적용하려면 각 픽셀이 다른 모�
 
 ![](.gitbook/assets/image%20%28131%29.png)
 
-###  <a id="31-vision-transformervit"></a>
-
 ### 3.1 Vision Transformer\(ViT\) <a id="31-vision-transformervit"></a>
 
 편의상 image input과 architecture 부분으로 나누어 설명한다.
@@ -80,8 +78,6 @@ Self-attention을 image에 naive하게 적용하려면 각 픽셀이 다른 모�
 ![](.gitbook/assets/image%20%28141%29.png)
 
 ![](.gitbook/assets/image%20%28140%29.png)
-
-
 
 지금부터는 아래 수식에 대해 살펴다.
 
@@ -95,9 +91,9 @@ Self-attention을 image에 naive하게 적용하려면 각 픽셀이 다른 모�
 
 ### 3.2 Fine-tuning and Higher Resolution <a id="32-fine-tuning-and-higher-resolution"></a>
 
-일반적으로 대규모 데이터 세트에 대해 ViT 를 pre-train 하고 downstream task를 find-tuning 한다. 이를 위해 pre-train 된 prediction head 를 제거하고 0으로 초기화한 D x K feedforward layer를 연결\(K: downstream class 의 수\)한다. pre-train 보다 높은 해상도로 fine-tuning 을 하는 것이 성능에 도움이 된다. 
+일반적으로 대규모 데이터 세트에 대해 ViT 를 pre-train 하고 downstream task를 find-tuning 한다. 이를 위해 pre-train 된 prediction head 를 제거하고 0으로 초기화한 D x K feedforward layer를 연결\(K: downstream class 의 수\)한다. pre-train 보다 높은 해상도로 fine-tuning 을 하는 것이 성능에 도움이 된다.
 
-Pre-train 보다 높은 resolution으로 fine-tuning하는 것은 종종 도움이 되며, 더 높은 resolution의 이미지를 feed할 때 patch 크기를 동일하게 유지하므로 sequence length가 더 길어진다. Vision Transformer는 임의의 sequence length\(up to memory constraint\)를 처리할 수 있지만 pre-trained position embedding은 의미가 없을 수 있다. 따라서 원본 이미지에서의 position에 따라 pre-trained position embedding의 2D interpolation을 수행한다. 이와 같은 해상도 조정과 패치 추출은 이미지의 2D 구조에 대한 inductive bias가 Vision Transformer에 수동으로 적용되는 유일한 부분으로 볼 수 다.
+Pre-train 보다 높은 resolution으로 fine-tuning하는 것은 종종 도움이 되며, 더 높은 resolution의 이미지를 feed할 때 patch 크기를 동일하게 유지하므로 sequence length가 더 길어진다. Vision Transformer는 임의의 sequence length\(up to memory constraint\)를 처리할 수 있지만 pre-trained position embedding은 의미가 없을 수 있다. 따라서 원본 이미지에서의 position에 따라 pre-trained position embedding의 2D interpolation을 수행한다. 이와 같은 해상도 조정과 패치 추출은 이미지의 2D 구조에 대한 inductive bias가 Vision Transformer에 수동으로 적용되는 유일한 부분으로 볼 수 있다.
 
 ## 4. Experiments <a id="4-experiments"></a>
 
@@ -156,21 +152,19 @@ SoTA와의 비교
 
 ViT-L/16 모델은 모든 dataset에서 BiT-L과 일치하거나 더 좋은 성능을 보여 준다. 또한 훨씬 적은 computational resource를 필요로 한다. 더 큰 모델인 Vit-H/14는 ImageNet, CIFAR-100, VTAB에서 더욱 좋은 성능을 보인다.
 
-또한 TPUv3-days을 통해 JFT-300M의 사전학습에 걸린 시간을 살펴 보면,  BiT과 NoisyStudent에서는 약 만 TPUv3-일, 반면 ViT-H/14에서는 약 1/4~1/5 정도로, ViT-L/16에서는 BiT-L보다 약간 더 좋은 성능을 약 1/15일만에 달성다.
+또한 TPUv3-days을 통해 JFT-300M의 사전학습에 걸린 시간을 살펴 보면, BiT과 NoisyStudent에서는 약 만 TPUv3-일, 반면 ViT-H/14에서는 약 1/4~1/5 정도로, ViT-L/16에서는 BiT-L보다 약간 더 좋은 성능을 약 1/15일만에 달성다.
 
 ![fig2](https://jeonsworld.github.io/static/7c8a03d1186558cd8438618211152449/fcda8/fig2.png)
 
- VTAB 전체/ Specialized/Structed에서 ViT-H/14 가 제일 좋은 성능을 내고 있다. 
+VTAB 전체/ Specialized/Structed에서 ViT-H/14 가 제일 좋은 성능을 내고 있다.
 
 {% hint style="success" %}
 ViT는 전이학습에 폭넓게 효과적이다.
 {% endhint %}
 
-
-
 ### 4.3 Pre-training Data Requirements <a id="43-pre-training-data-requirements"></a>
 
-ViT는 large-scale JFT-300M dataset에서 pre-train 한 결과 좋은 성능을 보여준다. 
+ViT는 large-scale JFT-300M dataset에서 pre-train 한 결과 좋은 성능을 보여준다.
 
 지금부터는 사전학습에 사용하는 dataset의 크기가 어느 정도의 영향을 끼치는지에 대해 실험하고, Hybrid와의 효율을 비교한다. Hybrid는 입력 패치를 ResNet에 삽입한 ViT를 의미한다.
 
@@ -209,8 +203,6 @@ ViT가 이미지를 처리하는 방법에 대해 좀 더 자세히 살펴본다
 
 ViT는 처음으로 내장층을 이용하는데, 이 학습한 결과를 가시화한 그림이다. 상단 figure는 학습된 embedding filter의 구성요소를 보여준다. 구성요소는 각 patch내 미세 구조의 low-dimensional representation에서 그럴듯한 basic function과 유사하다. 즉, CNN의 낮은 레이어에서 학습하는 것처럼 학습이 되었다는 것을 알 수 있다.
 
-
-
 ![](https://blog.kakaocdn.net/dn/bPc9qO/btqKXjPxPSG/npA5KU0PgseYzxl1wmMGWK/img.png)
 
 상단 그림은 Projection 이후 학습된 position embedding이 patch representation에 추가된 후, 모델이 position embedding의 유사성에서 이미지 내 거리를 encoding하는 방법을 학습함을 보여 준다.  
@@ -227,17 +219,15 @@ ex\)
 ![](https://blog.kakaocdn.net/dn/cGdlv1/btqKZoo5JQN/OoI46GbdGIqT93krvBd4iK/img.png)
 
 Convolution과 비교할 때 Attention의 장점은, ViT는 가장 낮은 layer에서도 전체 이미지에 대한 정보를 통합할 수 있다. Self-attention의 weight를 기반으로, 논문에서는 정보가 통합되는 이미지 공간의 평균 거리를 계산한다.  
-이를 attention distance라 부르고,  CNN의 receptive field size와 유사하다. 
+이를 attention distance라 부르고, CNN의 receptive field size와 유사하다.
 
-상단 그림에서는 attention 거리를 각 층의 head마다 표시하고 있다.  plot을 통해 알 수 있는 세 가지를 정리하면 다음과 같다.
+상단 그림에서는 attention 거리를 각 층의 head마다 표시하고 있다. plot을 통해 알 수 있는 세 가지를 정리하면 다음과 같다.
 
- ① 낮은 레이어에서는 Attention거리가 작은 헤드가 일정 수 존재한다. 즉, 낮은 레이어에서는 **CNN와 같은 국소적인 특징량을 추출**하고 있다.
+① 낮은 레이어에서는 Attention거리가 작은 헤드가 일정 수 존재한다. 즉, 낮은 레이어에서는 **CNN와 같은 국소적인 특징량을 추출**하고 있다.
 
 ② 낮은 레이어에서도 Attention 거리가 커다란 헤드가 일정 수 존재하다. 즉, 낮은 레이어에서는 **전역적인 특징량도 추출**하고 있다.
 
 ③ Hybrid의 낮은 레이어에서는 Attention 거리의 작은 헤드가 급감하는 것으로, 낮은 레이어에서의 Attention거리가 작은 헤드들은 CNN과 같은 역할을 달성하고 있다는 것을 알 수 있다.
-
-
 
 ### 4.6 Self-supervision \(자기교사학습\) <a id="46-self-supervision"></a>
 
@@ -269,8 +259,6 @@ Image recognition에서 Transformer를 직접 적용하는 방법을 제안했�
 
 #### C.7 Attention Map <a id="c7-attention-map"></a>
 
-
-
 ### Reference
 
 > [https://qiita.com/omiita/items/0049ade809c4817670d7](https://qiita.com/omiita/items/0049ade809c4817670d7)
@@ -286,4 +274,8 @@ Image recognition에서 Transformer를 직접 적용하는 방법을 제안했�
 > [https://jeonsworld.github.io/vision/vit/](https://jeonsworld.github.io/vision/vit/)
 >
 > [https://eehoeskrap.tistory.com/486](https://eehoeskrap.tistory.com/486)
+>
+> [https://github.com/gupta-abhay/ViT](https://github.com/gupta-abhay/ViT)
+>
+> [https://github.com/jeonsworld/ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch)
 
