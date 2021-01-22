@@ -10,7 +10,6 @@
 * [\[Lecture 12\] Visualizing and Understanding](lecture-12-visualizing-and-understanding.md)
 * [\[Lecture 13\] Generative Models](lecture-13-generative-models.md)
 * [\[Lecture 14\] Deep Reinforcement Learning](lecture-14-deep-reinforcement-learning.md)
-* [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](lecture-15-efficient-methods-and-hardware-for-deep-learning.md)
 * [\[Lecture 16\] Adversarial Examples and Adversarial Training](lecture-16-adversarial-examples-and-adversarial-training.md)
 * [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md)
 * [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md)
