@@ -29,6 +29,6 @@ description: >-
 | [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md) | 고유경 |
 | [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md) | 이홍정 |
 | [\[Microsoft Research\] An Introduction to Graph Neural Networks](microsoft-research-an-introduction-to-graph-neural-networks-models-and-applications.md) | 이혜민 |
-| [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://app.gitbook.com/@tobigs-staff/s/-1/~/drafts/-MRe3WaRBHnoMpPAt-Eb/paper-review-1-an-image-is-worth-16x16-words-transformers-for-image-recognition-at-scale) | 이유민 |
+| [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](paper-review-1-an-image-is-worth-16x16-words-transformers-for-image-recognition-at-scale.md) | 이유민 |
 | [\[Paper Review 2\] You Only Look Once Unified, Real-Time Object Detection](2.md) | 강미경 |
 
