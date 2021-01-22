@@ -15,5 +15,6 @@
 * [\[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)](mit-human-centered-artificial-intelligence.md)
 * [\[UCSanDiego\] 3D Deep Learning Tutorial](ucsandiego-3d-deep-learning-tutorial.md)
 * [\[Microsoft Research\] An Introduction to Graph Neural Networks: Models and Applications](microsoft-research-an-introduction-to-graph-neural-networks-models-and-applications.md)
+* [\[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](paper-review-1-an-image-is-worth-16x16-words-transformers-for-image-recognition-at-scale.md)
 * [\[Paper Review 2\] You Only Look Once Unified, Real-Time Object Detection](2.md)
 
