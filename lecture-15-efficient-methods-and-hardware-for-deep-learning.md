@@ -4,27 +4,25 @@ description: 13기 이유민
 
 # \[Paper Review 1\] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
 
+![](.gitbook/assets/image%20%28132%29.png)
+
 **An Image is Worth 16X16 Words: Transformers for Image Recognition at Scale**  
 Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby  
 [https://arxiv.org/abs/2010.11929](https://arxiv.org/abs/2010.11929)
 
 ## 0. Abstract <a id="abstract"></a>
 
-한 줄 요약 : NLP\(자연어 처리\)에서 쓰는 Transformer 개념을 컴퓨터 비전 분야에 적용해본 논문
+이번 리뷰에서는 현재 AI계에서 큰 관심을 받고 있는 "Vision Transformer"\(이하 ViT\)에 대해 다룬다. 
 
-현재 AI계에서 매우매우매우 많은 관심을 받고 있는 "Vision Transformer"\(이하 ViT\)에 대해 다룬다. 
+자연어 처리 분야에서 널리 사용되고 있는 Transformer 구조는 아직 컴퓨터 비전 분야에서 적용된 사례가 거의 없다. 지금까지의 attention은 컴퓨터 비전에서 CNN 구조에 주로 적용되어, 전체 구조를 유지하면서 bottleneck에서 attention하는 방식으로 진행되었다. 
 
-자연어 처리 분야에서 널리 사용되고 있는 개념인 Transformer 구조는 아직 컴퓨터 비전 분야에서 적용된 사례는 거의 없다. 
+본 논문에서는 이렇게 특정 구성 요소를 대체하는 것에 그치지 않고 image patch의 seqeuence에 Transformer를 적용하면 이미지 분류 task에서 우수한 성능을 보인다는 것을 발견했다. 많은 양의 데이터로 사전 학습\(pre-trained\)을 수행하고, 여러가지 ****recognition benchmark\(ImageNet, CIFAR-100, VTAB 등\)에 대해 transfer learning을 수행하면 학습과정에서 SOTA보다 훨씬 적은 계산량으로 우수한 결과를 얻을 수 있다.
 
-지금까지 attention은 컴퓨터 비전에서 CNN 구조에 주로 적용되어, 전체 구조를 유지하면서 bottleneck에서 attention하는 방식으로 진행되었다. 
+&gt;&gt; Transformer의 계산 효율성과  scalability를 비전에 활용한다!
 
-본 논문에서는 이렇게 특정 구성 요소를 대체하는 것에 그치지 않고 image patch의 seqeuence에 Transformer 를 적용하면 이미지 분류 task에서 우수한 성능을 보여주는 것을 발견했다. 
-
-많은 양의 데이터로 사전 학습\(pre-trained\)을 수행하고, 여러가지 ****recognition benchmark\(ImageNet, CIFAR-100, VTAB 등\)에 대해 transfer learning을 수행하면 SOTA CNN 보다 훨씬 적은 계산량으로 우수한 결과를 얻을 수 있다.
+### **※ Transformer in NLP**
 
 {% hint style="info" %}
-**Transformer in NLP**
-
 Long-term Dependency problem
 
 Solution : LSTM\(Long Short Term Memory-&gt; Attention
@@ -34,13 +32,34 @@ Solution : LSTM\(Long Short Term Memory-&gt; Attention
 
 ## 1. Introduction <a id="1-introduction"></a>
 
+NLP에서 Transformers는 대부분 large text corpus에서 pre-train을 수행하고, task-specific dataset에 대해 fine-tuning을 수행하는\(BERT\) 방식으로 접근한다.
 
+Transformers의 계산 효율성 및 확장성으로 100B 이상의 parameter를 사용하여 큰 모델을 학습 할 수 있게 되었다. 하지만 computer vision 분야에서는 여전히 CNN을 많이 사용하고 있으며 몇몇 연구에서 CNN과 비슷한 아키텍처와 self-attention의 결합을 시도해 왔다. 연구 예시는 아래 링크로 대체한다. 
+
+* [Wang et al., 2018](https://arxiv.org/abs/1906.01787); [Carion et al., 2020](https://arxiv.org/abs/2005.12872) 
+* [Ramachandran et al., 2019](https://arxiv.org/abs/1906.05909); [Wang et al. , 2020a](https://arxiv.org/abs/2003.07853)\).
+
+본 논문에서는 NLP의 Transformer 에서 모델을 가능한 수정하지 않으면서 Transformer 를 이미지에 직접 적용해본다. 
+
+**이를 위해 1\)이미지를 패치로 분할하고, 2\)이러한 패치의 선형 임베딩 시퀀스\(linear embedding sequence\)를 Transformer의 입력으로 한다. 이 때, 이미지 패치는 NLP 에서 token\(word\)와 동일한 방식으로 처리된다.** 
+
+모델은 ImageNet 과 같은 중간 규모의 데이터셋에서 학습할 때 비슷한 크기의 ResNet 보다 약간 낮은 정확도를 달성한다. **이는 equivariance 및 locality 즉 CNN 고유의 inductive bias 를 고려할 수 있는 기능이 transformer 에 없기 때문에 불충분한 양의 데이터에 대해 학습할 때 일반화가 잘 되지 않는 문제가 있기 때문이다.**
+
+하지만, 큰 규모의 데이터셋에서 **모델을 학습하면 inductive bias 를 뛰어넘을 수 있다. 다시 말해, 충분한 규모로 사전 학습되고 더 적은 데이터로 fine tuning 할 때 좋은 결과를 얻을 수 있다는 것이다.** JFT-300M 데이터 세트에 대해 사전 훈련 된 Vision Transformer는 여러 Image Recognition Benchmark에서 SotA에 접근하거나 이를 능가하여 ImageNet에서 88.36%, ImageNet-ReaL에서 90.77%, CIFAR-100에서 94.55%, 77.16%의 정확도를 달성했다.
 
 ## 2. Related Work <a id="2-related-work"></a>
 
-생략 
+Transformer는 NMT\(Neural Machine Translation\)을 위한 것으로, 많은 NLP task에서 SotA를 달성했다. Large Transformer-based model은 종종 large-scale corpus에 대해 pre-train을 수행하고 해당되는 task에 fine-tuning을 수행한다. BERT는 denoising self-supervised pre-training task를 사용하는 반면 GPT 계열은 language modeling방식으로 pre-train을 수행한다.
+
+Self-attention을 image에 naive하게 적용하려면 각 픽셀이 다른 모든 픽셀에 attention해야한다. 이는 픽셀수의 quadratic cost를 가지고 실제 input size로 확장되지 않는다. 따라서 image generation 측면에서 Transformer를 적용하기 위해 시도된 몇 가지 연구들이 있다.
+
+가장 최근의 연구인 [iGPT](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf)는 image resolution과 color sapce를 줄인 후 이미지에 대해 transformer를 적용한다. Model은 unsupervised 방식으로 학습되고 이후 fine-tuning을 수행하거나 linear를 수행하여 ImageNet에서 72%의 정확도를 달성하였다. 해당 연구는 SotA결과를 얻기 위해 추가적인 데이터에 의존한다.
+
+[Sun et al.\(2017\)](https://arxiv.org/abs/1707.02968)은 CNN 성능이 dataset 크기에 따라 어떻게 확장되는지 연구하고 [Kolesnikov et al. \(2020\)](https://arxiv.org/abs/1912.11370); [Djolonga et al. \(2020\)](https://arxiv.org/abs/2007.08558)은 ImageNet-21k 및 JFT-300M과 같은 large-scale dataset에서 CNN transfer learning에 대한 경험적 탐색을 수행하며, 모두 이번 논문에서 초점을 두고 있다.
 
 ## 3. Method <a id="3-method"></a>
+
+![](.gitbook/assets/image%20%28131%29.png)
 
 ### 3.1 Vision Transformer\(ViT\) <a id="31-vision-transformervit"></a>
 
