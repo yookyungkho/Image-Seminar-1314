@@ -1,3 +1,7 @@
+---
+description: 13기 서아라
+---
+
 # \[Lecture 13\] Generative Models
 
 ![cs231n 13 - p.1](.gitbook/assets/cs231n_lecture13_review_unlocked-1_page-0001.jpg)
