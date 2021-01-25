@@ -20,6 +20,8 @@ AI는 필연적으로 **불확실성\(uncertainty\)**이라는 특성을 갖는�
 
 ![](.gitbook/assets/7%20%281%29.png)
 
+조금 더 구체적으로 살펴보자면, 
+
 ## 2. 5 Grand Challenges of HCAI
 
 ### 1. HCAI during Learning Phase
