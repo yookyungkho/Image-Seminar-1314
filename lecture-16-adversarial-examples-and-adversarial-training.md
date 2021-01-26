@@ -78,7 +78,21 @@ Adversarial Examples를 설명할 때 가장 많이 쓰이는 이미지입니다
 
 그리고 모델이 underfitting이 된 이유는 모델이 부분적으로 'linear'하기 때문으로 설명하였습니다.
 
-여러 레이어를 쌓기 때문에 완전히 linear한 것은 아니지만, ReLU, Maxout, Carefully tuned sigmoid, LSTM등을 사용하기 때문에 piecewise linear하다는 것입니다,
+여러 레이어를 쌓기 때문에 완전히 linear한 것은 아니지만, ReLU, Maxout, Carefully tuned sigmoid, LSTM등을 사용하기 때문에 piecewise linear하다는 것입니다.
+
+
+
+그리고 우리가 기억할 것은, 우리가 adversarial examples를 만들 때, 이미지를 많이 변화를 주지 않고도 큰 변화를 만들어낼 수 있다는 것입니다.
+
+'3'을 나타내는 이미지에 대하여 같은 크기의 L2 norm perturbation을 주었는데, '어떤 식으로 주느냐'에 따라서 7이다, 3\(그대로\)이다, 어떤 class에도 속하지 않는다 라는 3가지 정말 다른 변화를 이끌어내었습니다.
+
+그러니까 결론적으로는 각 픽셀에 대한 작은 변화도 벡터 스페이스 상에서는 큰 변화를 이끌어낼 수 있다는 것입니다.\(제대로 된 이해인지는 모르겠습니다ㅠㅠ..\)
+
+
+
+adversarial example을 만들어내는 가장 빠른 방법은 cost의 gradient를 취하는 것이라 합니다.
+
+
 
 
 
