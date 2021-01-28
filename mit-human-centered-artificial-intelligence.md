@@ -4,13 +4,11 @@ description: 13기 고유경
 
 # \[MIT\] Introduction to Human-Centered Artificial Intelligence \(AI\)
 
-#### [Lecture Video](https://www.youtube.com/watch?v=bmjamLZ3v8A)
-
 #### 
 
 ![](.gitbook/assets/1%20%281%29.png)
 
-이번 주차에서는 특별 시간으로 MIT 컴퓨터공학과 Lex Fridman 교수의 인간중심 AI 개론 강의를 리뷰하겠다.
+이번 주차는 특별 시간으로 MIT 컴퓨터공학과 Lex Fridman 교수의 **인간 중심\(Human-Centered\) AI 개론 강의**\([Lecture Video](https://www.youtube.com/watch?v=bmjamLZ3v8A)\)를 리뷰하고자 한다.
 
 ![](.gitbook/assets/2%20%281%29.png)
 
@@ -18,7 +16,11 @@ description: 13기 고유경
 
 ![](.gitbook/assets/6%20%281%29.png)
 
+AI는 필연적으로 **불확실성\(uncertainty\)**이라는 특성을 갖는다. 때로는 공정하지 않고 안전에 반하는 결과를 내뱉는 모델의 학습 과정을 완전하게 설명하는 것이 불가능하기 때문이다. 따라서, **데이터 가공 과정과 학습된 모델을 real-world에 적용하는 과정에서 인간의 감독, 관리가 필요**하다는 것이 인간중심AI의 핵심 주장이다. 
+
 ![](.gitbook/assets/7%20%281%29.png)
+
+조금 더 구체적으로 살펴보자면, 
 
 ## 2. 5 Grand Challenges of HCAI
 
