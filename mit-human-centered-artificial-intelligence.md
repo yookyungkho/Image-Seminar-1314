@@ -28,17 +28,47 @@ AI는 필연적으로 **불확실성\(uncertainty\)**이라는 특성을 갖는�
 
 ## 2. 5 Grand Challenges of HCAI
 
-
+Learning Phase와 Real-World Operation로 나누어 HCAI의 주요 챌린지들을 살펴보자.
 
 ### 1. HCAI during Learning Phase
 
 ![](.gitbook/assets/9%20%281%29.png)
 
+{% tabs %}
+{% tab title="1. Machine Teaching" %}
+더욱 효과적인 지도학습을 위하여 적용되는 machine teaching은 적은 양의 예시를 통해 모델이 묻고 인간이 답하는 annotation 과정을 포함한다. 또한, 전체 데이터 중 어떤 부분을 활용할 것인지 학습 과정 중에 결정하는 active learning, 데이터를 여러 형태로 변형하는 data augmentation, 하나의 예시만 가지고 학습을 진행하는 one-shot learning과 강화학습의 self-play 등 모델이 직접 답을 찾아나가고 인간은 맞고 틀리다의 정답을 제시하는 학습 알고리즘을 활용한다.
+
+Grand challenge의 예시로, 위키피디아의 데이터로만 학습된 모델이 COCO object detection 챌린지에서 sota를 갱신했다. 또한 0~9까지의 숫자 이미지로 이루어진 MNIST 데이터셋에서 숫자 당 오직 1개의 이미지만 가지고 학습한 모델이 0.3% 정도 밖에 되지 않는 오류를 기록했다.
+{% endtab %}
+
+{% tab title="2. Human-in-the-Loop Reward Engineering" %}
+슬라이드 속 두 그림은 각각 인간과 강화학습 모델의 게임 화면을 캡쳐한 것이다. 왼쪽 인간의 화면처럼 배는 물길을 따라 앞으로 나아가야 하는데 RL agent의 화면을 보면 보상을 최대화하기 위해 원을 돌면서 순환하고 있음을 확인할 수 있다. 이러한 학습 과정의 오류를 방지하기 위하여 인간의 가치들을 학습 과정에 주입시켜 모델이 끝까지 완주를 마치도록 하면서, 보상을 얻을 수 있는 적절한 방식을 터득해나가도록 하는 것이다.
+
+이와 비슷한 예시로 자동화된 추천시스템을 통해 의사결정을 내리도록하는 새로운 접근 방식이 있을 수 다.
+{% endtab %}
+{% endtabs %}
+
 ### 2. HCAI during Real-World Operation
 
 ![](.gitbook/assets/10%20%281%29.png)
 
+{% tabs %}
+{% tab title="3. Human Sensing" %}
+
+{% endtab %}
+
+{% tab title="4. Human-Robot Interaction Experience" %}
+
+{% endtab %}
+{% endtabs %}
+
 ![](.gitbook/assets/11%20%281%29.png)
+
+5. AI Safety
+
+마지막으로 가장 중요하게 여겨야 할 안정성 관련 문제이다.
+
+
 
 ## 3. Deep Learning for Understanding Human
 
@@ -59,6 +89,4 @@ AI는 필연적으로 **불확실성\(uncertainty\)**이라는 특성을 갖는�
 ### 4. Gesture Recognition
 
 ![](.gitbook/assets/17.png)
-
-![](.gitbook/assets/18%20%281%29.png)
 
