@@ -108,10 +108,6 @@ Detection\(Where is head?\)과 Recognition\(Who is this?\)는 다르다. 객체 
 
 ![](.gitbook/assets/15%20%281%29.png)
 
-동작 인식은 이미지나 비디오에 나타나는 사람의 동작을 분류하는 태스크이다.
-
-동작 인식이 어려운 이유는 우선 동작의 종류가 셀 수 없이 많아 유한한 클래스로 분류할 수 없고, 비슷한 동작이라 하더라도 
-
 ### 3. Body Pose Estimation
 
 ![](.gitbook/assets/16%20%281%29.png)
