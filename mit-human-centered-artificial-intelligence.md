@@ -82,13 +82,35 @@ HCAI에서 인간과 로봇의 상호작용은 매우 중요한 영역이다. �
 
 인간을 이해하기 위한 딥러닝 기술은 그동안 여러 분야로 나뉘어서 발전해왔다. 얼굴 탐지, 포즈 인식, 음성 인식, 추천시스템, 감성분석, 언어 이해, 대화 시스템 등 우리에게 익숙한 연구 분야들이 인간중심AI라는 대주제로 묶일 수 있다. 지금부터는 강의에서 다뤘던 파란색 파트 6개 중 비전 분야와 연관된 **얼굴 인식, 동작 인식, 포즈 추정, 제스쳐 인식** 순으로 연구 흐름을 살펴보고자 한다.
 
-### 1. Face Recognition
+
+
+### 1. Face Recognition \(얼굴 인식\)
 
 ![](.gitbook/assets/14%20%281%29.png)
 
-### 2. Activity Recognition
+Detection\(Where is head?\)과 Recognition\(Who is this?\)는 다르다. 객체 탐지는 사진이나 영상 속 객체가 어디에 있는지 위치 자체를 탐색하는 것이라면, 얼굴 인식은 탐지된 얼굴이 누구인지를 인식하는 태스크이다.
+
+**얼굴 인식이 어려운 이유**는 비슷한 외모의 사람들을 구별하기 어렵다는 점, 얼굴 사진 데이터를 얻기가 까다롭다는 점, 동일한 사람일지라도 각도나 표정에 따라 다양한 얼굴 형상이 나타난다는 점, 스마트폰 얼굴인식 잠금해제와 같이 보안과 직결된 태스크에서는 거의 100에 가까운 정확도를 기록해야 한다는 점 등이 있다.
+
+슬라이드 아래 화살표를 따라 **얼굴 인식 분야의 연구 흐름**을 살펴보자.
+
+**2014년 페이스북**에서 발표한 논문 [DeepFace: Closing the Gap to Human-Level Performance in Face Verification](https://www.cs.toronto.edu/~ranzato/publications/taigman_cvpr14.pdf) 은 딥 뉴럴넷 구조를 이용한 얼굴인식 연구의 물꼬를 트며 CVPR에 등재되었다.
+
+이어서 **2015년 SOTA**를 기록하며 CVPR에 등재된 **구글**의 논문  [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/pdf/1503.03832.pdf)에서는 Embedding\(임베딩\)을 통해 feature representation\(이미지의 특징을 숫자 벡터로 재표현하는 것\)을 직접적으로 최적화하는 방법을 선보였다.
+
+**2017년** 마찬가지로 CVPR에 등재된 **워싱턴대**의 논문 [Level Playing Field for Million Scale Face Recognition](https://openaccess.thecvf.com/content_cvpr_2017/papers/Nech_Level_Playing_Field_CVPR_2017_paper.pdf)에서는 기존 연구들의 데이터 사이즈를 크게 윗도는 약 **67만명의 사진 470만장**으로 연구를 진행하여 대량의 이미지 데이터로 대표되는 앞으로의 연구 방향을 시사했다.
+
+앞으로 얼굴 인식 분야의 연구는 모델이 어떻게 사람간의 얼굴 차이를 구분하고 인식하는지 블랙박스와도 같은 모델의 학습 과정을 해석하고 개인정보 이슈를 풀어나가는데에 집중하게 될 것이다.
+
+ 
+
+### 2. Activity Recognition \(동작 인식\)
 
 ![](.gitbook/assets/15%20%281%29.png)
+
+동작 인식은 이미지나 비디오에 나타나는 사람의 동작을 분류하는 태스크이다.
+
+동작 인식이 어려운 이유는 우선 동작의 종류가 셀 수 없이 많아 유한한 클래스로 분류할 수 없고, 비슷한 동작이라 하더라도 
 
 ### 3. Body Pose Estimation
 
