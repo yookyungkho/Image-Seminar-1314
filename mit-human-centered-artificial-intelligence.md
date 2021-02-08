@@ -118,7 +118,7 @@ HCAI에서 인간과 로봇의 상호작용은 매우 중요한 영역이다. �
 
 **동작 인식 분야의 연구 흐름**을 살펴보면,
 
-
+2017년 CVPR에 등재된 딥마인드의 논문 [Quo Vadis, Action Recognition? A New Model and the Kinetics Datase](https://arxiv.org/pdf/1705.07750.pdf) 은 3d ConvNet으로 two stream 대량의 비디오 데이터를 
 
 
 
