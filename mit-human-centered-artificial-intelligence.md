@@ -118,7 +118,13 @@ HCAI에서 인간과 로봇의 상호작용은 매우 중요한 영역이다. �
 
 **동작 인식 분야의 연구 흐름**을 살펴보면,
 
-2017년 CVPR에 등재된 딥마인드의 논문 [Quo Vadis, Action Recognition? A New Model and the Kinetics Datase](https://arxiv.org/pdf/1705.07750.pdf) 은 3d ConvNet으로 two stream 대량의 비디오 데이터를 
+**2017년** CVPR에 등재된 **딥마인드**의 논문 [Quo Vadis, Action Recognition? A New Model and the Kinetics Datas](https://arxiv.org/pdf/1705.07750.pdf)에서는 action classification을 위한 새로운 데이터셋인 Kinetics 데이터셋을 만들고 이를 기반으로 I3학습을 진행하였다. 3d ConvNet을 two stream으로 구성하여 RGB 뿐 아니라 optical flow 정보도 넣어줌으로써 motion 정보에 대해 더 잘 예측할 수 있도록 하여 Sota를 기록하다.
+
+**2018년** 마찬가지로 CVPR에 등재된 **오스틴대**의 논문 [Im2Flow: Motion Hallucination from Static Images for Action Recognition](https://www.groundai.com/project/im2flow-motion-hallucination-from-static-images-for-action-recognition/1)에서는 동작 이미지에서 이어지는 동작 flow까지 예측하면서 동작 분류를 수행하였다.
+
+이처럼 앞으로 동작 인식 분야의 연구는 동작의 complexity를 줄이고 단순한 동작 분류를 넘어 이어지는 동작 예측까지 수행할 수 있도록 발전될 것이고 그 과정에서 모델이 '문맥', 즉 상황적 배경을 고려할 수 있도록 하는데에 집중할 것이다.
+
+
 
 
 
